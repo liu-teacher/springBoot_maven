@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--    3.项目的基本信息-->
+
+    <!--    groupId:项目的组名,通常是反转的域名,比如com.example-->
+    <!--    artifactId:项目的唯一标识符,通常是项目的名称-->
+    <!--    version:项目的版本号-->
+    <!--    packaging:项目的打包方式.通常是jar,war,pom 默认是jar-->
+
+    <!--    name:项目名,提供项目的简短名称-->
+    <!--    description:项目描述,提供项目的详细描述-->
+    <!--    version:项目主页,提供项目的网址-->
+    <!--    licenses:许可证声明,声明项目所使用的一种或多种许可证-->
+    <!--    developers:开发证信息,列出项目的开发人员-->
+    <!--    url:项目主页,提供项目的网址-->
+
+    <!--    1.modules:当前项目的子项目-->
+    <!--    2.parent用于声明当前项目的父项目-->
+    <!--    3.scm:软件配置管理-->
+    <!--    4.properties:作用:-->
+    <!--    1.统一管理项目中的常用属性,比如版本号,路径,插件版本等,方便统一修改和管理-->
+    <!--    2.可以在配置过程中使用${...}占位符引用这些属性,使得配置更加灵活和便捷-->
+    <!--    3.避免硬编码,提高代码的可维护性和可读性-->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>springBoot_maven</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springBoot_maven</name>
+    <description>springBoot_maven</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.7.6</spring-boot.version>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <!--数据库mysql-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.43</version>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <!--plugins的作用是定义maven插件,plugins主要用于扩展maven功能,帮助开发人员更方便的构建、打包、发布项目
+            插件可以通过maven的插件中心或者自己构建的私有仓库来使用,能在构建过程中执行特定的任务,比如编译、打包、测试等。-->
+        <!-- 插件的配置可以分为两种方式:全局配置和项目配置。全局配置是在maven安装目录下的
+             conf/settings.xml文件中进行配置,可以被所有的项目使用。项目配置则是在项目的pom.xml文件中进行配置,只对当前项目生效-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>com.example.springboot_maven.SpringBootMavenApplication</mainClass>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
